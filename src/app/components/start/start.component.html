@@ -1,0 +1,21 @@
+<form class="form" [formGroup] = "form">
+  <div>
+    <br>
+    <div>Введите Логин</div>
+    <br>
+    <input id="login_input" type="text" pInputText formControlName="login" placeholder="Логин"/>
+    <p-message severity="error" *ngIf="formErrors.login" text="{{formErrors.login}}"></p-message>
+    <br>
+    <div class="text_authorization">Введите пароль</div>
+    <br>
+    <input type="password" pPassword id="password_input" formControlName="password" placeholder="Пароль"/>
+    <p-message severity="error" *ngIf="formErrors.password" text="{{formErrors.password}}"></p-message>
+  </div>
+
+
+  <br>
+  <button pButton type="submit" label="Войти" (click)="onSubmit('LogIn')" [disabled]="form.invalid"></button>
+  <button pButton type="submit" label="Зарегестрироваться" (click)="onSubmit('RegIn')" [disabled]="form.invalid"></button>
+  <!-- routerLink="/main"            (click)="onSubmit()" routerLink="/main" -->
+  <!--Кнопка должна будет отправлять форму на сервер-->
+</form>

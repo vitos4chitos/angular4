@@ -1,0 +1,17 @@
+.table{
+  width: 95%;
+  height: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+#table_xyr{
+  width: 80%;
+  border: 1px solid white;
+  margin: auto;
+  font-size: 150%;
+}
+
+#table_xyr td{
+  text-align: center;
+}
