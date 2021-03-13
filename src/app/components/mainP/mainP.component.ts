@@ -14,7 +14,7 @@ import {map} from "rxjs/operators";
 })
 export class MainPComponent implements OnInit {
 
-  url = "http://localhost:8080/adddot";
+  url = "http://localhost:42011/Lab4_war/adddot";
   xInput:number;
   rInput:number;
   yInput:number;
@@ -127,12 +127,12 @@ export class MainPComponent implements OnInit {
     circle.setAttribute('cx', cx.toString());
     circle.setAttribute('cy', cy.toString());
     circle.setAttribute('r', "3");
-    circle.setAttribute('fill-opacity', "0.3");
+    circle.setAttribute('fill-opacity', "0.5");
     circle.setAttribute('class', 'points');
     if (this.checkArea(cx, cy, r)) {
-      circle.setAttribute("fill", "#2E8B57");
+      circle.setAttribute("fill", "#4dff00");
     } else {
-      circle.setAttribute("fill", "#800000");;
+      circle.setAttribute("fill", "#ff0000");
     }
     console.log(cx + ' ' + cy + ' ' + r + ' ');
     // @ts-ignore
@@ -160,7 +160,7 @@ export class MainPComponent implements OnInit {
   async commitPoint(username: string | null, r: number, x: number, y: number) {
     if (localStorage.getItem("token") === null || localStorage.getItem("user") === null) {
       localStorage.clear();
-      this.router.navigateByUrl("/start");
+      this.router.navigateByUrl("/~s284691/dist/ClientPart/start");
       return;
     }
     if(x == 0) {
@@ -174,7 +174,7 @@ export class MainPComponent implements OnInit {
     }).subscribe(point => {
       if(point === null){
         localStorage.clear();
-        this.router.navigateByUrl("/start");
+        this.router.navigateByUrl("/~s284691/dist/ClientPart/start");
         alert("Сервер временно недоступен. Попробуйте позже")
       }
       else {
@@ -184,7 +184,7 @@ export class MainPComponent implements OnInit {
       },
       error => {
         localStorage.clear();
-        this.router.navigateByUrl("/start");
+        this.router.navigateByUrl("/~s284691/dist/ClientPart/start");
         alert("Сервер временно недоступен. Попробуйте позже")
       }
     );
@@ -238,6 +238,20 @@ export class MainPComponent implements OnInit {
   onExit() {
     sessionStorage.setItem('main', 'no');
     localStorage.clear();
+  }
+  updateDots() {
+    if (this.dots != '' && this.rInput !== null && this.rInput > 0) {
+      this.dots = '';
+      document.querySelectorAll("circle").forEach((e) => e.remove());
+      // @ts-ignore
+      let points = localStorage.getItem('dots').split(';');
+      for (let i = 0; i < points.length - 2; i += 3) {
+        let new_cx = this.getXSVG(parseFloat(points[i]), this.rInput);
+        let new_cy = this.getYSVG(parseFloat(points[i + 1]), this.rInput);
+        this.createDot(new_cx, new_cy, this.rInput);
+        this.saveDots(new_cx, new_cy, this.rInput);
+      }
+    }
   }
 
 
