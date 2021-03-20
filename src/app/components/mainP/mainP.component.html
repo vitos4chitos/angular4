@@ -22,7 +22,7 @@
         <td>
           <label class = "label r">
             <h3>Значение R:</h3><br/>
-            <p-autoComplete [(ngModel)]="rInput" [suggestions]="rValuesFiltered" (completeMethod)="searchR($event)" name = "rInput" type="number" [maxlength]="10"></p-autoComplete>
+            <p-autoComplete [(ngModel)]="rInput" [suggestions]="rValuesFiltered" (completeMethod)="searchR($event)" name = "rInput" type="number" [maxlength]="10" (change)="updateDots()"></p-autoComplete>
           </label>
         </td>
         <td id="picture" align="center">
@@ -104,7 +104,7 @@
   </table>
 </div>
 <div>
-  <button routerLink="/start" id="exit" pButton type="button" label="Exit"
+  <button routerLink="/~s284691/dist/ClientPart/start" id="exit" pButton type="button" label="Exit"
           class="buttons" (click)="onExit()" ></button>
 </div>
 <!--<div id="main_page">-->

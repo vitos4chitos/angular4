@@ -35,8 +35,8 @@ export class StartComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(sessionStorage.getItem('main') === 'yes');
-    if (sessionStorage.getItem('main') === 'yes') {
-      this.router.navigate(["/main"]);
+    if (this.auth.isTokenExpired()) {
+      this.router.navigate(["/~s284691/dist/ClientPart/main"]);
     } else {
       localStorage.clear();
     }
@@ -52,13 +52,13 @@ export class StartComponent implements OnInit {
     if(data === 'LogIn'){
       this.user = this.form.value;
       this.mainServer.setCurrentUser(this.user.login);
-      localStorage.setItem("user", this.mainServer.currentUser);
+      localStorage.setItem("user", this.user.login);
       this.auth.login(this.form.value)
     }
     else{
       this.user = this.form.value;
       this.mainServer.setCurrentUser(this.user.login);
-      localStorage.setItem("user", this.mainServer.currentUser);
+      localStorage.setItem("user", this.user.login);
       this.auth.reg(this.form.value);
     }
   }
